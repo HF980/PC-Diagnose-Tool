@@ -2,22 +2,24 @@
 
 # PC Diagnose Tool
 
+![Build Status](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)
+
 A powerful yet lightweight desktop application for **real-time system diagnostics**.  
 Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk, network usage, and logs the data using **SQLite** — all without relying on external services.
 
 ---
 
-## Features
+## ✨ Features
 
-- **Live system monitoring** – CPU, RAM, network, and running processes
-- **Local logging** – Saves diagnostics in SQLite for historical analysis
-- **Modern GUI** – Built with PyQt6 (optional but sleek)
-- **Modular structure** – Easy to maintain, extend, and test
-- **Cross-platform** – Runs on Windows, macOS, and Linux
+- **Live system monitoring** – CPU, RAM, network, and running processes  
+- **Local logging** – Saves diagnostics in SQLite for historical analysis  
+- **Modern GUI** – Built with PyQt6 (optional but sleek)  
+- **Modular structure** – Easy to maintain, extend, and test  
+- **Cross-platform** – Runs on Windows, macOS, and Linux  
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 pc_diagnose_tool/
@@ -41,22 +43,15 @@ pc_diagnose_tool/
 
 ---
 
-## Installation
+## ⚙️ Installation
 
-1. Make sure Python 3.10+ is installed
-2. Install dependencies:
-
----
+1. Make sure **Python 3.10+** is installed  
+2. (Optional) Create and activate a virtual environment:
 
 ```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+3. Install dependencies:
 pip install -r requirements.txt
-
----
-
-## Running the Application
-python main.py
-
----
-
-## Preview
-![Screenshot](./resources/screenshot.png)
+pip freeze > requirements.txt
