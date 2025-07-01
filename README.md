@@ -19,28 +19,24 @@ Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk
 
 ## Project Structure
 
-```text
-pc_diagnose_tool/
-├── main.py                   # Main launcher script for the GUI app
-├── logging_db.py             # Module managing the SQLite database logging
-├── system_info.py            # Fetches system info (CPU, RAM, network, processes)
-├── gui_elements.py           # GUI components and tab widgets (PyQt6)
-├── db_manager.py             # (optional) Base class for database abstraction
-
-├── PC_Diagnosis_Logs/        # Folder for saved database files / logs
-│   └── system_metrics.db     # SQLite DB storing logged metrics
-
-├── resources/                # Icons, stylesheets, and other assets
-│   └── icon.png              # Example icon
-
-├── tests/                    # Unit tests for modules
-│   ├── test_system_info.py
-│   └── test_logging_db.py
-
-└── README.md                 # Project description and usage guide
-
-
----
+```
+.
+├── LICENSE
+├── PC_Diagnosis_Logs
+│   ├── system_metrics.db
+│   └── test_system_logs.db
+└── src
+    ├── db_manager.py
+    ├── gui_elements.py
+    ├── logging_db.py
+    ├── main.py
+    ├── system_info.py
+    └── tests
+    │   ├── test_logging_db.py
+    │   └── test_system_info.py
+    └── README.md
+    └── requirements.txt
+```
 
 ## Installation
 
