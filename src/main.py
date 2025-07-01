@@ -61,8 +61,8 @@
 
 #------------------------------------------------------------------------------
 # main.py
-import sys
-import os
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Finde den Projekt-Root und füge ihn zum Python-Pfad hinzu
 # Dies stellt sicher, dass 'src' gefunden wird, egal woher main.py gestartet wird.
