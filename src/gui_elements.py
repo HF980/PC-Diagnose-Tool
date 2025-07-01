@@ -7,8 +7,10 @@
 # @version: 1.0
 #********************************************#
 
-"""
+'''
 ------------------------------------------------------------------------------
+# Purpose
+
 gui_elements.py – Modular PyQt6 Widgets for System Monitoring GUI
 
 This module provides a suite of PyQt6-based widget classes for building a 
@@ -44,8 +46,8 @@ These widgets form the foundation of a PC diagnostic or monitoring tool,
 enabling users to visualize and analyze system performance, resource usage, 
 and process activity in real time or from historical logs.
 
-------------------------------------------------------------------------------
-"""
+#------------------------------------------------------------------------------
+'''
 
 
 # gui_elements.py
