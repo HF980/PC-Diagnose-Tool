@@ -46,7 +46,7 @@ These widgets form the foundation of a PC diagnostic or monitoring tool,
 enabling users to visualize and analyze system performance, resource usage, 
 and process activity in real time or from historical logs.
 
-#------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 '''
 
 
