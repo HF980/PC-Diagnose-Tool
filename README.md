@@ -1,39 +1,23 @@
-PC Diagnose Tool
+# 🖥️ PC Diagnose Tool
 
-PC Diagnose Tool is a lightweight, cross-platform Python application designed to help users analyze the health and performance of their personal computers. It collects and displays key system information in real-time, making it ideal for troubleshooting, monitoring, and general diagnostics.
-Features
+A powerful yet lightweight desktop application for **real-time system diagnostics**.  
+Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk, network usage, and logs the data using **SQLite** — all without relying on external services.
 
-    System Overview: OS, hostname, architecture, uptime
-    CPU Information: Model name, per-core usage, temperature (if supported)
-    Memory: Total, used, available, percentage used
-    Disk Usage: Usage per partition, total and free space
-    Network: Active interfaces, local IP, bandwidth monitoring
-    Battery: Charge level, charging status, time remaining (on laptops)
-    Export Reports: Output as .txt or .json
-    GUI Interface (optional): User-friendly interface using PyQt6 or Tkinter
+---
 
-Tech Stack
+## 🚀 Features
 
-    Language: Python 3.8+
-    Core Libraries:
-        psutil
-        platform, socket, datetime
-        Optional: PyQt6 or Tkinter for GUI
+- 🧠 **Live system monitoring** – CPU, RAM, network, and running processes
+- 🗃️ **Local logging** – Saves diagnostics in SQLite for historical analysis
+- 🎨 **Modern GUI** – Built with PyQt6 (optional but sleek)
+- 🔌 **Modular structure** – Easy to maintain, extend, and test
+- 📦 **Cross-platform** – Runs on Windows, macOS, and Linux
 
-Getting Started
-Prerequisites
+---
 
-    Python 3.8 or newer installed on your system
+## 📁 Project Structure
 
-Installation
-
-pip install psutil For GUI support (optional): pip install PyQt6
-Usage
-
-Command-line version: python diagnose.py
-
-GUI version (if implemented): python gui_app.py
-Project Structure
+```text
 pc_diagnose_tool/
 ├── main.py               # Main launcher script for the GUI app
 ├── logging_db.py         # Module managing the SQLite database logging
