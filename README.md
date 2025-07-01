@@ -39,19 +39,23 @@ pc_diagnose_tool/
 
 └── README.md             # Project description and usage guide
 
+---
 
 ## Installation
 
 1. Make sure Python 3.10+ is installed
 2. Install dependencies:
 
+---
 ```bash
 pip install -r requirements.txt
 
+---
 
 ## Running the Application
 python main.py
 
-## Preview
+---
 
+## Preview
 ![Screenshot](./resources/screenshot.png)
