@@ -41,7 +41,7 @@ pc_diagnose_tool/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 1. Make sure Python 3.10 is installed  
 2. (Optional) Create and activate a virtual environment:
