@@ -40,32 +40,43 @@
 
 #------------------------------------------------------------------------------
 
-# db_manager.py
 import sqlite3
 import os
 
 class LoggingDBManager:
     def __init__(self, db_path="PC_Diagnosis_Logs", db_name="system_metrics.db"):
-        # Stelle sicher, dass das Verzeichnis existiert
-        self.log_dir = os.path.expanduser(db_path)
-        os.makedirs(self.log_dir, exist_ok=True)
-        self.db_name = os.path.join(self.log_dir, db_name)
+        """
+        Ensures the logging directory exists and initializes the SQLite database.
+        Creates the directory if it doesn't exist, then connects to the DB and
+        creates the system_logs table if needed.
+        """
+        self.log_dir = os.path.expanduser(db_path)  # Expand user (~) if present
+        os.makedirs(self.log_dir, exist_ok=True)   # Create directory if missing
+        self.db_name = os.path.join(self.log_dir, db_name)  # Full DB file path
         self.conn = None
         self.cursor = None
-        self._connect_db()
-        self._create_table()
+        self._connect_db()     # Establish DB connection
+        self._create_table()   # Create logs table if it doesn't exist
 
     def _connect_db(self):
+        """
+        Connects to the SQLite database and creates a cursor.
+        Prints an error if connection fails.
+        """
         try:
             self.conn = sqlite3.connect(self.db_name)
             self.cursor = self.conn.cursor()
-            # print(f"Datenbank '{self.db_name}' erfolgreich initialisiert.")
+            # print(f"Database '{self.db_name}' successfully initialized.")
         except sqlite3.Error as e:
-            print(f"Fehler beim Verbinden mit der Datenbank: {e}")
+            print(f"Error connecting to database: {e}")
             self.conn = None
             self.cursor = None
 
     def _create_table(self):
+        """
+        Creates the 'system_logs' table with columns for timestamp and metrics.
+        Uses IF NOT EXISTS to avoid errors if table is already there.
+        """
         if self.cursor:
             self.cursor.execute('''
                 CREATE TABLE IF NOT EXISTS system_logs (
@@ -80,10 +91,16 @@ class LoggingDBManager:
             self.conn.commit()
 
     def log_snapshot(self, snapshot_data):
+        """
+        Inserts or replaces a snapshot entry into the system_logs table.
+        snapshot_data should be a dict containing:
+          timestamp, cpu_percent, ram_percent, ram_used_gb, bytes_sent_gb, bytes_recv_gb
+        """
         if self.cursor:
             try:
                 self.cursor.execute('''
-                    INSERT OR REPLACE INTO system_logs (timestamp, cpu_percent, ram_percent, ram_used_gb, bytes_sent_gb, bytes_recv_gb)
+                    INSERT OR REPLACE INTO system_logs 
+                    (timestamp, cpu_percent, ram_percent, ram_used_gb, bytes_sent_gb, bytes_recv_gb)
                     VALUES (?, ?, ?, ?, ?, ?)
                 ''', (
                     snapshot_data["timestamp"],
@@ -95,23 +112,18 @@ class LoggingDBManager:
                 ))
                 self.conn.commit()
             except sqlite3.Error as e:
-                print(f"Fehler beim Schreiben des Log-Eintrags: {e}")
-    def test_log_and_retrieve(self):
-        snapshot = {
-            "timestamp": "2025-06-30 12:00:00",
-            "cpu_percent": 10.5,
-            "ram_percent": 20.5,
-            "ram_used_gb": 3.2,
-            "bytes_sent_gb": 1.1,
-            "bytes_recv_gb": 2.2
-        }
-        self.db_manager.log_snapshot(snapshot)
-        
-        logs = self.db_manager.get_all_logs()
-        self.assertTrue(len(logs) > 0)
-        self.assertEqual(len(logs[0]), 6)  # timestamp + 5 metrics
+                print(f"Error writing log entry: {e}")
 
     def log_system_metrics(self, cpu, ram, used_gb, sent, recv):
+        """
+        Helper method to create a snapshot with the current datetime and log it.
+        Parameters:
+          cpu   - CPU usage percent
+          ram   - RAM usage percent
+          used_gb - RAM used in GB
+          sent  - Bytes sent in GB
+          recv  - Bytes received in GB
+        """
         from datetime import datetime
         snapshot = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -120,31 +132,40 @@ class LoggingDBManager:
             "ram_used_gb": used_gb,
             "bytes_sent_gb": sent,
             "bytes_recv_gb": recv
-    }
+        }
         self.log_snapshot(snapshot)
         return True
 
     def get_all_logs(self):
+        """
+        Retrieves all log entries ordered by timestamp ascending.
+        Returns a list of tuples or an empty list on failure.
+        """
         if self.cursor:
             try:
                 self.cursor.execute("SELECT * FROM system_logs ORDER BY timestamp ASC")
                 return self.cursor.fetchall()
             except sqlite3.Error as e:
-                print(f"Fehler beim Abrufen der Logs: {e}")
+                print(f"Error fetching logs: {e}")
         return []
 
     def clear_all_logs(self):
-        """Löscht alle Einträge aus der system_logs Tabelle."""
+        """
+        Deletes all records from the system_logs table.
+        """
         if self.cursor:
             try:
                 self.cursor.execute("DELETE FROM system_logs")
                 self.conn.commit()
-                # print("Alle Logs erfolgreich gelöscht.")
+                # print("All logs successfully deleted.")
             except sqlite3.Error as e:
-                print(f"Fehler beim Löschen der Logs: {e}")
+                print(f"Error deleting logs: {e}")
 
     def close(self):
+        """
+        Safely closes the database connection.
+        """
         if self.conn:
             self.conn.close()
-            # print("Datenbankverbindung geschlossen.")
+            # print("Database connection closed.")
 
