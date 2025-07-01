@@ -39,11 +39,11 @@ class BaseInfoWidget(QWidget):
 
     def setup_ui(self):
         """Must be implemented by subclasses to create UI layout"""
-        raise NotImplementedError("setup_ui muss in Unterklassen implementiert werden")
+        raise NotImplementedError("setup_ui must be implemented in subclasses")
 
     def update_data(self):
         """Must be implemented by subclasses to refresh data"""
-        raise NotImplementedError("update_data muss in Unterklassen implementiert werden")
+        raise NotImplementedError("update_data must be implemented in subclasses")
 
 
 class OverviewLayout(BaseInfoWidget):
@@ -53,7 +53,7 @@ class OverviewLayout(BaseInfoWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         # OS information label
-        self.os_label = QLabel("<b>Betriebssystem:</b> ")
+        self.os_label = QLabel("<b>Operating system:</b> ")
         self.layout.addWidget(self.os_label)
 
         # CPU usage section
@@ -71,21 +71,21 @@ class OverviewLayout(BaseInfoWidget):
         self.layout.addWidget(self.ram_usage_progress)
 
         # Disk usage section
-        self.disk_label = QLabel("<b>Festplatte (C: / Root):</b> ")
+        self.disk_label = QLabel("<b>hard drive (C: / Root):</b> ")
         self.layout.addWidget(self.disk_label)
         self.disk_usage_progress = QProgressBar()
         self.disk_usage_progress.setTextVisible(True)
         self.layout.addWidget(self.disk_usage_progress)
         
         # Network usage section
-        self.network_label = QLabel("<b>Netzwerk (Aktuell):</b> ")
+        self.network_label = QLabel("<b>network (Live):</b> ")
         self.layout.addWidget(self.network_label)
 
         self.layout.addStretch(1)  # Add spacing at bottom
 
     def update_data(self):
         # Update OS information
-        self.os_label.setText(f"<b>Betriebssystem:</b> {platform.system()} {platform.release()} ({platform.version()})")
+        self.os_label.setText(f"<b>Operating system:</b> {platform.system()} {platform.release()} ({platform.version()})")
 
         # Update CPU information
         cpu_data = self.system_info_fetcher.get_cpu_info()
@@ -102,7 +102,7 @@ class OverviewLayout(BaseInfoWidget):
         used_ram = ram_data.get("used_ram_gb", 0.0)
         self.ram_label.setText(f"<b>RAM:</b> {used_ram:.2f} GB / {total_ram:.2f} GB")
         self.ram_usage_progress.setValue(int(ram_percent))
-        self.ram_usage_progress.setFormat(f"RAM-Auslastung: {ram_percent:.1f}%")
+        self.ram_usage_progress.setFormat(f"memory usage: {ram_percent:.1f}%")
 
         # Update disk information (system drive)
         try:
@@ -116,20 +116,20 @@ class OverviewLayout(BaseInfoWidget):
             disk_used_gb = round(disk_usage.used / (1024**3), 2)
             disk_percent = disk_usage.percent
 
-            self.disk_label.setText(f"<b>Festplatte:</b> {disk_used_gb:.2f} GB / {disk_total_gb:.2f} GB")
+            self.disk_label.setText(f"<b>Hard drive:</b> {disk_used_gb:.2f} GB / {disk_total_gb:.2f} GB")
             self.disk_usage_progress.setValue(int(disk_percent))
             self.disk_usage_progress.setFormat(f"Festplattenauslastung: {disk_percent:.1f}%")
         except Exception as e:
             # Handle disk access errors
-            self.disk_label.setText(f"<b>Festplatte:</b> Fehler ({e})")
+            self.disk_label.setText(f"<b>Hard drive:</b> Fehler ({e})")
             self.disk_usage_progress.setValue(0)
-            self.disk_usage_progress.setFormat("Nicht verfügbar")
+            self.disk_usage_progress.setFormat("Not available")
 
         # Update network information
         net_io_rates = self.system_info_fetcher.get_network_io_rates()
         sent_kbs = net_io_rates.get("bytes_sent_rate_kbs", 0.0)
         recv_kbs = net_io_rates.get("bytes_recv_rate_kbs", 0.0)
-        self.network_label.setText(f"<b>Netzwerk (Aktuell):</b> Gesendet: {sent_kbs:.1f} KB/s | Empfangen: {recv_kbs:.1f} KB/s")
+        self.network_label.setText(f"<b>Network (Live):</b> Upload: {sent_kbs:.1f} KB/s | Download: {recv_kbs:.1f} KB/s")
 
 
 class CPULayout(BaseInfoWidget):
@@ -139,17 +139,17 @@ class CPULayout(BaseInfoWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         # CPU specification labels
-        self.cpu_model_label = QLabel("<b>CPU Modell:</b> ")
+        self.cpu_model_label = QLabel("<b>CPU Model:</b> ")
         self.layout.addWidget(self.cpu_model_label)
-        self.physical_cores_label = QLabel("<b>Physische Kerne:</b> ")
+        self.physical_cores_label = QLabel("<b>Pphysical cores:</b> ")
         self.layout.addWidget(self.physical_cores_label)
-        self.logical_cores_label = QLabel("<b>Logische Kerne:</b> ")
+        self.logical_cores_label = QLabel("<b>logical cores:</b> ")
         self.layout.addWidget(self.logical_cores_label)
-        self.current_freq_label = QLabel("<b>Aktuelle Frequenz:</b> ")
+        self.current_freq_label = QLabel("<b>Current Frequency:</b> ")
         self.layout.addWidget(self.current_freq_label)
-        self.max_freq_label = QLabel("<b>Max. Frequenz:</b> ")
+        self.max_freq_label = QLabel("<b>Maximum Frequency:</b> ")
         self.layout.addWidget(self.max_freq_label)
-        self.cpu_total_percent_label = QLabel("<b>Gesamtauslastung:</b> ")
+        self.cpu_total_percent_label = QLabel("<b>Total CPU Usage:</b> ")
         self.layout.addWidget(self.cpu_total_percent_label)
 
         self.layout.addSpacing(10)  # Vertical spacing
@@ -193,19 +193,19 @@ class CPULayout(BaseInfoWidget):
         # Update frequency info
         current_freq = cpu_data.get('current_frequency_mhz', 'N/A')
         if current_freq is not None:
-            self.current_freq_label.setText(f"<b>Aktuelle Frequenz:</b> {current_freq:.2f} MHz")
+            self.current_freq_label.setText(f"<b>Current Frequency:</b> {current_freq:.2f} MHz")
         else:
-            self.current_freq_label.setText("<b>Aktuelle Frequenz:</b> N/A")
+            self.current_freq_label.setText("<b>Current Frequency:</b> N/A")
 
         max_freq = cpu_data.get('max_frequency_mhz', 'N/A')
         if max_freq is not None:
-            self.max_freq_label.setText(f"<b>Max. Frequenz:</b> {max_freq:.2f} MHz")
+            self.max_freq_label.setText(f"<b>Maximum Frequency:</b> {max_freq:.2f} MHz")
         else:
-            self.max_freq_label.setText("<b>Max. Frequenz:</b> N/A")
+            self.max_freq_label.setText("<b>Maximum Frequency:</b> N/A")
 
         # Update total CPU usage
         total_percent = cpu_data.get('total_percent', 0.0)
-        self.cpu_total_percent_label.setText(f"<b>Gesamtauslastung:</b> {total_percent:.1f}%")
+        self.cpu_total_percent_label.setText(f"<b>Total Usage:</b> {total_percent:.1f}%")
 
         # Update per-core usage
         per_cpu_percent = cpu_data.get('per_cpu_percent', [])
@@ -222,13 +222,13 @@ class MemoryLayout(BaseInfoWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         # RAM section
-        self.ram_total_label = QLabel("<b>Gesamt RAM:</b> ")
+        self.ram_total_label = QLabel("<b>Total Memory:</b> ")
         self.layout.addWidget(self.ram_total_label)
-        self.ram_available_label = QLabel("<b>Verfügbarer RAM:</b> ")
+        self.ram_available_label = QLabel("<b>Available Memory:</b> ")
         self.layout.addWidget(self.ram_available_label)
-        self.ram_used_label = QLabel("<b>Genutzter RAM:</b> ")
+        self.ram_used_label = QLabel("<b>Used Memory:</b> ")
         self.layout.addWidget(self.ram_used_label)
-        self.ram_percent_label = QLabel("<b>RAM Auslastung:</b> ")
+        self.ram_percent_label = QLabel("<b>Memory Usage:</b> ")
         self.layout.addWidget(self.ram_percent_label)
         self.ram_progress_bar = QProgressBar()
         self.ram_progress_bar.setTextVisible(True)
@@ -237,11 +237,11 @@ class MemoryLayout(BaseInfoWidget):
         self.layout.addSpacing(20)  # Section spacing
 
         # Swap section
-        self.swap_total_label = QLabel("<b>Gesamt Swap:</b> ")
+        self.swap_total_label = QLabel("<b>Total Swap:</b> ")
         self.layout.addWidget(self.swap_total_label)
-        self.swap_used_label = QLabel("<b>Genutzter Swap:</b> ")
+        self.swap_used_label = QLabel("<b>Used Swap:</b> ")
         self.layout.addWidget(self.swap_used_label)
-        self.swap_percent_label = QLabel("<b>Swap Auslastung:</b> ")
+        self.swap_percent_label = QLabel("<b>Swap Usage:</b> ")
         self.layout.addWidget(self.swap_percent_label)
         self.swap_progress_bar = QProgressBar()
         self.swap_progress_bar.setTextVisible(True)
@@ -254,23 +254,23 @@ class MemoryLayout(BaseInfoWidget):
         mem_data = self.system_info_fetcher.get_memory_info()
 
         # Update RAM info
-        self.ram_total_label.setText(f"<b>Gesamt RAM:</b> {mem_data.get('total_ram_gb', 0.0):.2f} GB")
-        self.ram_available_label.setText(f"<b>Verfügbarer RAM:</b> {mem_data.get('available_ram_gb', 0.0):.2f} GB")
-        self.ram_used_label.setText(f"<b>Genutzter RAM:</b> {mem_data.get('used_ram_gb', 0.0):.2f} GB")
+        self.ram_total_label.setText(f"<b>Total RAM:</b> {mem_data.get('total_ram_gb', 0.0):.2f} GB")
+        self.ram_available_label.setText(f"<b>Available RAM:</b> {mem_data.get('available_ram_gb', 0.0):.2f} GB")
+        self.ram_used_label.setText(f"<b>Used RAM:</b> {mem_data.get('used_ram_gb', 0.0):.2f} GB")
         
         ram_percent = mem_data.get('ram_percent', 0.0)
-        self.ram_percent_label.setText(f"<b>RAM Auslastung:</b> {ram_percent:.1f}%")
+        self.ram_percent_label.setText(f"<b>RAM Usage:</b> {ram_percent:.1f}%")
         self.ram_progress_bar.setValue(int(ram_percent))
-        self.ram_progress_bar.setFormat(f"Auslastung: {ram_percent:.1f}%")
+        self.ram_progress_bar.setFormat(f"Load: {ram_percent:.1f}%")
 
         # Update Swap info
-        self.swap_total_label.setText(f"<b>Gesamt Swap:</b> {mem_data.get('total_swap_gb', 0.0):.2f} GB")
-        self.swap_used_label.setText(f"<b>Genutzter Swap:</b> {mem_data.get('used_swap_gb', 0.0):.2f} GB")
+        self.swap_total_label.setText(f"<b>Total Swap:</b> {mem_data.get('total_swap_gb', 0.0):.2f} GB")
+        self.swap_used_label.setText(f"<b>Used Swap:</b> {mem_data.get('used_swap_gb', 0.0):.2f} GB")
         
         swap_percent = mem_data.get('swap_percent', 0.0)
-        self.swap_percent_label.setText(f"<b>Swap Auslastung:</b> {swap_percent:.1f}%")
+        self.swap_percent_label.setText(f"<b>Swap Usage:</b> {swap_percent:.1f}%")
         self.swap_progress_bar.setValue(int(swap_percent))
-        self.swap_progress_bar.setFormat(f"Auslastung: {swap_percent:.1f}%")
+        self.swap_progress_bar.setFormat(f"Load: {swap_percent:.1f}%")
 
 
 class NetworkLayout(BaseInfoWidget):
@@ -282,11 +282,11 @@ class NetworkLayout(BaseInfoWidget):
         # Network summary labels
         self.hostname_label = QLabel("<b>Hostname:</b> ")
         self.layout.addWidget(self.hostname_label)
-        self.primary_ip_label = QLabel("<b>Primäre IP-Adresse:</b> ")
+        self.primary_ip_label = QLabel("<b>Primary IP Address:</b> ")
         self.layout.addWidget(self.primary_ip_label)
-        self.bytes_sent_label = QLabel("<b>Gesendet:</b> ")
+        self.bytes_sent_label = QLabel("<b>Sent:</b> ")
         self.layout.addWidget(self.bytes_sent_label)
-        self.bytes_recv_label = QLabel("<b>Empfangen:</b> ")
+        self.bytes_recv_label = QLabel("<b>Received:</b> ")
         self.layout.addWidget(self.bytes_recv_label)
 
         self.layout.addSpacing(20)  # Section spacing
@@ -294,7 +294,7 @@ class NetworkLayout(BaseInfoWidget):
         # Network interfaces table
         self.interfaces_table = QTableWidget()
         self.interfaces_table.setColumnCount(3)
-        self.interfaces_table.setHorizontalHeaderLabels(["Schnittstelle", "Typ", "Adresse"])
+        self.interfaces_table.setHorizontalHeaderLabels(["Interface", "Type", "Address"])
         self.interfaces_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.interfaces_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.layout.addWidget(self.interfaces_table)
@@ -307,9 +307,9 @@ class NetworkLayout(BaseInfoWidget):
 
         # Update summary info
         self.hostname_label.setText(f"<b>Hostname:</b> {net_data['Hostname']}")
-        self.primary_ip_label.setText(f"<b>Primäre IP-Adresse:</b> {net_data['Primary IP']}")
-        self.bytes_sent_label.setText(f"<b>Gesendet:</b> {net_data['Bytes Sent (GB)']:.2f} GB")
-        self.bytes_recv_label.setText(f"<b>Empfangen:</b> {net_data['Bytes Received (GB)']:.2f} GB")
+        self.primary_ip_label.setText(f"<b>Primary IP Address:</b> {net_data['Primary IP']}")
+        self.bytes_sent_label.setText(f"<b>Sent:</b> {net_data['Bytes Sent (GB)']:.2f} GB")
+        self.bytes_recv_label.setText(f"<b>Received:</b> {net_data['Bytes Received (GB)']:.2f} GB")
 
         # Update interfaces table
         interfaces_data = net_data.get("Interfaces", {})
@@ -344,7 +344,7 @@ class ProcessesLayout(BaseInfoWidget):
         self.processes_table = QTableWidget()
         self.processes_table.setColumnCount(8)
         self.processes_table.setHorizontalHeaderLabels([
-            "PID", "Name", "CPU (%)", "RAM (RSS MB)", "RAM (VMS MB)", "Threads", "User", "Startzeit"
+            "PID", "Name", "CPU (%)", "RAM (RSS MB)", "RAM (VMS MB)", "Threads", "User", "Start Time"
         ])
         self.processes_table.setSortingEnabled(True)
         self.processes_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
@@ -401,7 +401,7 @@ class ProgramsLayout(BaseInfoWidget):
         # Programs table setup
         self.programs_table = QTableWidget()
         self.programs_table.setColumnCount(1)
-        self.programs_table.setHorizontalHeaderLabels(["Programmname"])
+        self.programs_table.setHorizontalHeaderLabels(["Program Name"])
         self.programs_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.programs_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.programs_table.setSortingEnabled(True)
@@ -445,17 +445,17 @@ class LogsLayout(BaseInfoWidget):
         button_layout = QHBoxLayout()
         
         # Refresh button
-        self.refresh_button = QPushButton("Logs aktualisieren")
+        self.refresh_button = QPushButton("Update Logs")
         self.refresh_button.clicked.connect(self.update_data)
         button_layout.addWidget(self.refresh_button)
 
         # Export button
-        self.export_button = QPushButton("Logs exportieren (CSV)")
+        self.export_button = QPushButton("Export Logs (CSV)")
         self.export_button.clicked.connect(self.export_logs_to_csv)
         button_layout.addWidget(self.export_button)
 
         # Clear logs button
-        self.clear_logs_button = QPushButton("Logs löschen")
+        self.clear_logs_button = QPushButton("Clear Logs")
         self.clear_logs_button.clicked.connect(self.confirm_clear_logs)
         button_layout.addWidget(self.clear_logs_button)
         
@@ -507,7 +507,7 @@ class LogsLayout(BaseInfoWidget):
         """Export logs to CSV file"""
         # File save dialog
         options = QFileDialog.Option.DontUseNativeDialog
-        file_name, _ = QFileDialog.getSaveFileName(self, "Logs exportieren",
+        file_name, _ = QFileDialog.getSaveFileName(self, "Export Logs",
                                                    "system_metrics.csv", "CSV Files (*.csv);;All Files (*)", options=options)
         if file_name:
             logs = self.db_manager.get_all_logs()
@@ -518,23 +518,23 @@ class LogsLayout(BaseInfoWidget):
                     csv_writer.writerow(["Timestamp", "CPU (%)", "RAM (%)", "RAM (GB)", "Bytes Sent (GB)", "Bytes Recv (GB)"])
                     csv_writer.writerows(logs)
                 # Success notification
-                QMessageBox.information(self, "Export erfolgreich", f"Logs wurden erfolgreich exportiert nach:\n{file_name}")
+                QMessageBox.information(self, "Export Successful", f"Logs were successfully exported to:\n{file_name}")
             except Exception as e:
                 # Error handling
-                QMessageBox.critical(self, "Exportfehler", f"Fehler beim Exportieren der Logs: {e}")
+                QMessageBox.critical(self, "Export Error", f"Error exporting logs: {e}")
 
     def confirm_clear_logs(self):
         """Confirm log deletion with user"""
-        reply = QMessageBox.question(self, "Logs löschen",
-                                     "Sind Sie sicher, dass Sie ALLE Systemmetrik-Logs löschen möchten?\n"
-                                     "Diese Aktion kann NICHT rückgängig gemacht werden.",
+        reply = QMessageBox.question(self, "Clear Logs",
+                                     "Are you sure you want to delete ALL system metric logs?\n
+                                     "This action CANNOT be undone.",
                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                      QMessageBox.StandardButton.No)
         if reply == QMessageBox.StandardButton.Yes:
             # Clear logs and update UI
             self.db_manager.clear_all_logs()
             self.update_data()
-            QMessageBox.information(self, "Logs gelöscht", "Alle Systemmetrik-Logs wurden gelöscht.")
+            QMessageBox.information(self, "Logs deleted", "All system metric logs have been deleted.")
 
 
 class DateAxisItem(pg.AxisItem):
