@@ -1,21 +1,21 @@
-# 🖥️ PC Diagnose Tool
+# PC Diagnose Tool
 
 A powerful yet lightweight desktop application for **real-time system diagnostics**.  
 Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk, network usage, and logs the data using **SQLite** — all without relying on external services.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🧠 **Live system monitoring** – CPU, RAM, network, and running processes
-- 🗃️ **Local logging** – Saves diagnostics in SQLite for historical analysis
-- 🎨 **Modern GUI** – Built with PyQt6 (optional but sleek)
-- 🔌 **Modular structure** – Easy to maintain, extend, and test
-- 📦 **Cross-platform** – Runs on Windows, macOS, and Linux
+- **Live system monitoring** – CPU, RAM, network, and running processes
+- **Local logging** – Saves diagnostics in SQLite for historical analysis
+- **Modern GUI** – Built with PyQt6 (optional but sleek)
+- **Modular structure** – Easy to maintain, extend, and test
+- **Cross-platform** – Runs on Windows, macOS, and Linux
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 pc_diagnose_tool/
