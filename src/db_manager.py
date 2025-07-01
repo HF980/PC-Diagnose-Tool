@@ -7,6 +7,39 @@
 # @version: 1.0
 #********************************************#
 
+#------------------------------------------------------------------------------
+# Purpose
+
+# This module provides a class called LoggingDBManager that handles the logging and management
+# of system metrics such as CPU usage, RAM usage, and network traffic (sent/received data).
+# It stores the logs in a local SQLite database for future analysis or monitoring purposes.
+
+# Method                            Description
+# -------                           -------------
+# __init__()                        Creates the logging directory and initializes the SQLite database.
+# _connect_db()                     Establishes a connection to the database file.
+# _create_table()                   Creates the system_logs table if it doesn’t already exist.
+# log_snapshot(data)                Inserts or updates a system snapshot (timestamp + metrics).
+# get_all_logs()                    Returns all stored logs in chronological order.
+# clear_all_logs()                  Deletes all records from the log table.
+# close()                           Closes the database connection safely.
+
+# Directory Structure
+# -------------------
+
+# PC_Diagnosis_Logs/
+# └── system_metrics.db      SQLite database file containing log entries
+
+
+# Use Case
+# --------
+# This database manager is ideal for:
+#  Background system monitoring
+#  Diagnostic snapshots
+#  Exportable logs for performance analysis
+
+#------------------------------------------------------------------------------
+
 # db_manager.py
 import sqlite3
 import os
