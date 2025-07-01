@@ -1,3 +1,5 @@
+[![Python application test](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml)
+
 # PC Diagnose Tool
 
 A powerful yet lightweight desktop application for **real-time system diagnostics**.  
