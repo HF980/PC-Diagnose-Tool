@@ -21,23 +21,23 @@ Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk
 
 ```text
 pc_diagnose_tool/
-├── main.py               # Main launcher script for the GUI app
-├── logging_db.py         # Module managing the SQLite database logging
-├── system_info.py        # Fetches system info (CPU, RAM, network, processes)
-├── gui_elements.py       # GUI components and tab widgets (PyQt6)
-├── db_manager.py         # (optional) Base class for database abstraction
+├── main.py                   # Main launcher script for the GUI app
+├── logging_db.py             # Module managing the SQLite database logging
+├── system_info.py            # Fetches system info (CPU, RAM, network, processes)
+├── gui_elements.py           # GUI components and tab widgets (PyQt6)
+├── db_manager.py             # (optional) Base class for database abstraction
 
-├── PC_Diagnosis_Logs/    # Folder for saved database files / logs
+├── PC_Diagnosis_Logs/        # Folder for saved database files / logs
 │   └── system_metrics.db     # SQLite DB storing logged metrics
 
-├── resources/            # Icons, stylesheets, and other assets
+├── resources/                # Icons, stylesheets, and other assets
 │   └── icon.png              # Example icon
 
-├── tests/                # Unit tests for modules
+├── tests/                    # Unit tests for modules
 │   ├── test_system_info.py
 │   └── test_logging_db.py
 
-└── README.md             # Project description and usage guide
+└── README.md                 # Project description and usage guide
 
 ---
 
