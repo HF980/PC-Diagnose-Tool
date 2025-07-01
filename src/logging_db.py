@@ -136,23 +136,4 @@ class LoggingDBManager:
             self.conn = None
             print(f"Database connection to '{self.db_name}' closed.")
 
-# Example usage (for testing database functions)
-if __name__ == "__main__":
-    db_manager = LoggingDBManager("test_system_logs.db")
 
-    # Log some data
-    db_manager.log_system_metrics(25.5, 45.2, 8.1, 10.5, 20.3)
-    import time
-    time.sleep(1)  # Short pause to get different timestamps
-    db_manager.log_system_metrics(30.1, 50.0, 9.2, 11.0, 21.5)
-
-    print("\nAll stored logs:")
-    for row in db_manager.get_all_logs():
-        print(row)
-
-    db_manager.close_connection()
-
-    # Optional: delete test database file to start fresh each test
-    if os.path.exists("test_system_logs.db"):
-        os.remove("test_system_logs.db")
-        print("Test database deleted.")
