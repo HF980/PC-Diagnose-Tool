@@ -572,17 +572,17 @@ class GraphLayout(BaseInfoWidget):
 
         # --- CPU Graph Tab ---
         self.cpu_plot_widget = pg.PlotWidget(axisItems={'bottom': DateAxisItem(orientation='bottom')})
-        self.cpu_plot_widget.setTitle("CPU-Auslastung über Zeit")
-        self.cpu_plot_widget.setLabel('left', "CPU Auslastung", units='%')
-        self.cpu_plot_widget.setLabel('bottom', "Zeit")
+        self.cpu_plot_widget.setTitle("CPU Usage Over Time")
+        self.cpu_plot_widget.setLabel('left', "CPU Usage", units='%')
+        self.cpu_plot_widget.setLabel('bottom', "Time")
         self.cpu_plot_widget.addLegend()
         self.cpu_curve = self.cpu_plot_widget.plot(name="CPU (%)", pen='y')  # Yellow line
         self.graph_tab_widget.addTab(self.cpu_plot_widget, "CPU")
 
         # --- RAM Graph Tab ---
         self.ram_plot_widget = pg.PlotWidget(axisItems={'bottom': DateAxisItem(orientation='bottom')})
-        self.ram_plot_widget.setTitle("RAM-Nutzung über Zeit")
-        self.ram_plot_widget.setLabel('left', "RAM Auslastung", units='%')
+        self.ram_plot_widget.setTitle("RAM Usage Over Time")
+        self.ram_plot_widget.setLabel('left', "RAM Usage", units='%')
         self.ram_plot_widget.setLabel('bottom', "Zeit")
         self.ram_plot_widget.addLegend()
         self.ram_curve_percent = self.ram_plot_widget.plot(name="RAM (%)", pen='b')  # Blue line
@@ -591,16 +591,16 @@ class GraphLayout(BaseInfoWidget):
 
         # --- Netzwerk Graph Tab ---
         self.network_plot_widget = pg.PlotWidget(axisItems={'bottom': DateAxisItem(orientation='bottom')})
-        self.network_plot_widget.setTitle("Netzwerkdurchsatz über Zeit")
-        self.network_plot_widget.setLabel('left', "Durchsatz", units='KB/s')
-        self.network_plot_widget.setLabel('bottom', "Zeit")
+        self.network_plot_widget.setTitle("Network Throughput Over Time")
+        self.network_plot_widget.setLabel('left', "Throughput", units='KB/s')
+        self.network_plot_widget.setLabel('bottom', "Time")
         self.network_plot_widget.addLegend()
         self.bytes_sent_rate_curve = self.network_plot_widget.plot(name="Gesendet (KB/s)", pen='c')  # Cyan line
         self.bytes_recv_rate_curve = self.network_plot_widget.plot(name="Empfangen (KB/s)", pen='m')  # Magenta line
-        self.graph_tab_widget.addTab(self.network_plot_widget, "Netzwerk")
+        self.graph_tab_widget.addTab(self.network_plot_widget, "Network")
 
         # Refresh button
-        self.refresh_button = QPushButton("Graphen aktualisieren")
+        self.refresh_button = QPushButton("Update Graphs")
         self.refresh_button.clicked.connect(self.update_data)
         self.layout.addWidget(self.refresh_button)
 
