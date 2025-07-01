@@ -9,7 +9,7 @@ Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk
 
 ---
 
-## ✨ Features
+## Features
 
 - **Live system monitoring** – CPU, RAM, network, and running processes  
 - **Local logging** – Saves diagnostics in SQLite for historical analysis  
@@ -19,7 +19,7 @@ Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 pc_diagnose_tool/
@@ -48,7 +48,7 @@ pc_diagnose_tool/
 1. Make sure **Python 3.10+** is installed  
 2. (Optional) Create and activate a virtual environment:
 
-```bash
+bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
