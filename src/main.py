@@ -2,11 +2,9 @@
 # @ #!/usr/bin/env
 # @Project: pc_diagnose_tool
 # @file name: main.py
-# @author: Houssein
 # @creation date: 30.06.2025
 # @lastmodified: 30.06.2025
 # @version: 1.0
-# @copyright: © 2025 Houssein. All rights reserved.
 #********************************************#
 
 # main.py
