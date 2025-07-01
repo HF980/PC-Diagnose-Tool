@@ -7,6 +7,47 @@
 # @version: 1.0
 #********************************************#
 
+"""
+------------------------------------------------------------------------------
+gui_elements.py – Modular PyQt6 Widgets for System Monitoring GUI
+
+This module provides a suite of PyQt6-based widget classes for building a 
+comprehensive system monitoring and diagnostics GUI. Each class encapsulates 
+the logic and layout for displaying real-time or historical system metrics, 
+including CPU, memory, disk, network, running processes, installed programs, 
+and system logs with graphical visualization.
+
+Widget Classes
+--------------
+- BaseInfoWidget          : Abstract base class for all info/monitoring widgets.
+- OverviewLayout          : Dashboard overview of OS, CPU, RAM, disk, and network.
+- CPULayout               : Detailed CPU metrics, including per-core usage.
+- MemoryLayout            : RAM and swap usage details.
+- NetworkLayout           : Network summary and interface details.
+- ProcessesLayout         : Live process table with resource usage.
+- ProgramsLayout          : List of installed programs.
+- LogsLayout              : Table view of logged system metrics, with export/clear options.
+- GraphLayout             : Interactive time-series graphs for CPU, RAM, and network.
+- DateAxisItem            : Custom axis for displaying datetime values in graphs.
+
+Key Features
+------------
+- Modular, reusable widget classes for easy integration into PyQt6 applications.
+- Real-time data updates via `update_data()` methods.
+- Advanced plotting with PyQtGraph for historical trends.
+- Export and management of logs (CSV export, clearing).
+- Designed for extensibility and maintainability.
+
+Typical Use Case
+----------------
+These widgets form the foundation of a PC diagnostic or monitoring tool, 
+enabling users to visualize and analyze system performance, resource usage, 
+and process activity in real time or from historical logs.
+
+------------------------------------------------------------------------------
+"""
+
+
 # gui_elements.py
 
 # Import necessary PyQt6 components for UI creation
