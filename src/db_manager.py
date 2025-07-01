@@ -28,7 +28,7 @@
 # -------------------
 
 # PC_Diagnosis_Logs/
-# └── system_metrics.db      SQLite database file containing log entries
+# └── system_metrics.db              SQLite database file containing log entries
 
 
 # Use Case
