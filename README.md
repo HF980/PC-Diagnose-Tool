@@ -1,10 +1,5 @@
 [![Python application test](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml)
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-
-![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
-
-
 # PC Diagnose Tool
 
 A powerful yet lightweight desktop application for **real-time system diagnostics**.  
