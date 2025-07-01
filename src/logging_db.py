@@ -7,6 +7,37 @@
 # @version: 1.0
 #********************************************#
 
+
+#------------------------------------------------------------------------------
+# Purpose
+#
+# This module provides the LoggingDBManager class to manage system performance logs
+# in a local SQLite database. It supports storing, retrieving, and managing
+# time-stamped system metrics such as CPU usage, RAM usage, and network traffic.
+#
+# Methods
+# -------
+# __init__(db_name="system_logs.db")
+#     Initializes the database connection and prepares the database file.
+#
+# init_db()
+#     Creates the system_metrics table if it does not already exist.
+#
+# log_system_metrics(cpu_percent, ram_percent, ram_used_gb, bytes_sent_gb, bytes_recv_gb)
+#     Inserts a new system metrics record with a current timestamp.
+#
+# get_all_logs()
+#     Retrieves all logged metrics ordered by timestamp ascending.
+#
+# close_connection()
+#     Safely closes the database connection.
+#
+# Use case
+# --------
+# Ideal for lightweight, local logging of system metrics to support
+# diagnostic tools, performance monitoring, or exportable log archives.
+#------------------------------------------------------------------------------
+
 # logging_db.py
 import sqlite3
 import os
