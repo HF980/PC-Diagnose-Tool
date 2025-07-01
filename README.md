@@ -1,4 +1,4 @@
-[![Python application test](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml)
+[![Python application test](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml) ![License: GPL 3.0](https://img.shields.io/badge/License-GPL%203.0-4CAF50?style=flat-square)
 
 # PC Diagnose Tool
 
