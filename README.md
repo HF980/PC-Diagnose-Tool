@@ -2,8 +2,6 @@
 
 # PC Diagnose Tool
 
-![Build Status](https://github.com/HF980/PC-Diagnose-Tool/actions/workflows/python-app.yml/badge.svg)
-
 A powerful yet lightweight desktop application for **real-time system diagnostics**.  
 Built with **Python** and **PyQt6**, it provides insights into CPU, memory, disk, network usage, and logs the data using **SQLite** — all without relying on external services.
 
