@@ -7,6 +7,59 @@
 # @version: 1.0
 #********************************************#
 
+#------------------------------------------------------------------------------
+# Purpose
+
+# This is the main entry point for the PC Diagnose Tool application.
+# It initializes the PyQt6 GUI, sets up tabs for various system monitoring views,
+# manages periodic data logging to the SQLite database, and updates all UI tabs accordingly.
+
+# Class
+# -----
+# SystemDiagnosisApp              Main window class that organizes and updates all diagnostic tabs.
+
+# Methods
+# -------
+# __init__()                     Sets up window, initializes system info fetcher, DB manager, and UI.
+# setup_tabs()                   Creates and adds all tabs (Overview, CPU, Memory, Network, Processes,
+#                               Programs, Logs, Graphs) to the main QTabWidget.
+# setup_timer()                  Starts a QTimer to periodically log system snapshots and refresh tabs.
+# log_and_update_all_tabs()      Captures system snapshot, logs it in the database,
+#                               and updates all tab widgets.
+# closeEvent(event)              Ensures DB connection is closed when app exits.
+
+# Application Flow
+# ----------------
+# 1. On startup, system info fetcher and DB manager are initialized.
+# 2. Tabs are created and added to main window.
+# 3. A timer triggers periodic data logging and UI updates every 100 seconds.
+# 4. User can view live system data, logs, and historical graphs.
+
+# Technical Details
+# -----------------
+# - Dynamically adjusts Python path to locate project modules regardless of run context.
+# - Integrates multiple custom widgets imported from 'src.gui.pyqt6.pc_diagnose_tool'.
+# - Uses PyQt6 widgets, layouts, and signals for GUI.
+# - Stores system snapshots in SQLite via LoggingDBManager.
+
+# Use Case
+# --------
+# Designed for:
+#  - Real-time system diagnostics and monitoring on desktop.
+#  - Collecting and visualizing system metrics history.
+#  - Extensible platform for additional diagnostic tools and data export.
+
+# Directory Structure
+# -------------------
+# pc_diagnose_tool/
+# ├── main.py                   This main application launcher script
+# ├── logging_db.py             Database manager module
+# ├── gui_elements.py           GUI tab widget definitions
+# ├── system_info.py            System info fetching utilities
+# └── PC_Diagnosis_Logs/
+#     └── system_metrics.db     SQLite database file storing system logs
+
+#------------------------------------------------------------------------------
 # main.py
 import sys
 import os
