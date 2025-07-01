@@ -49,7 +49,7 @@ import socket
 from datetime import datetime
 import time
 import os
-import cpuinfo  # Newly added
+import cpuinfo  
 class SystemInfoFetcher:
     def __init__(self):
         # Stores the last net_io_counters value for rate calculation
